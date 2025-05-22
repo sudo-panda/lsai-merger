@@ -1,3 +1,6 @@
 [submodule "LSAI-Checkpointing"]
 	path = LSAI-Checkpointing
 	url = git@github.com:WatchmeDoc/LSAI-Checkpointing.git
+[submodule "flash-attention"]
+	path = flash-attention
+	url = git@github.com:Dao-AILab/flash-attention.git
