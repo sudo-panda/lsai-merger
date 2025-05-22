@@ -1,0 +1,3 @@
+[submodule "LSAI-Checkpointing"]
+	path = LSAI-Checkpointing
+	url = git@github.com:WatchmeDoc/LSAI-Checkpointing.git
