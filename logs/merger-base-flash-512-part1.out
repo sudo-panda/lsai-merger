@@ -1,0 +1,33 @@
+2025-05-22 17:34:38,735 - root - INFO - Experiment args: Namespace(dataset='/capstor/store/cscs/ethz/large-sc/datasets/train_data.parquet', tokenizer_name_or_path='unsloth/Mistral-Nemo-Base-2407-bnb-4bit', sequence_length=512, batch_size=1, fused_optimizer=False, learning_rate=1e-05, lr_warmup_steps=10, training_steps=1000, logging_frequency=5, profile=False, profile_step_start=10, profile_step_end=12, grad_max_norm=1, model_dtype='bf16', compile=False, seed=4, checkpoint_dir='/iopsstor/scratch/cscs/bkundu/lsai-merger/chkpts', loss_file='/iopsstor/scratch/cscs/bkundu/lsai-merger/results/bf16/loss-base-flash-512-part1.csv', checkpoint_freq=100, max_async=1, warmup=3, load_checkpoint=False, non_blocking=False)
+2025-05-22 17:34:38,816 - root - INFO - Setting up DataLoaders...
+2025-05-22 17:34:47,107 - root - INFO - Setting up Model...
+2025-05-22 17:34:53,507 - root - INFO - Starting training!
+2025-05-22 17:35:06,308 - root - INFO - Step: 1 | Loss: 11.87 | Tokens per second: 37.03 | Training tokens per second (%): 100.00 | MFU (%): 0.00 | TFLOPs: 0.0456709 | Fwd time: 12.2026195 | Bck time: 0.2044810
+2025-05-22 17:35:06,772 - root - INFO - Step: 5 | Loss: 11.97 | Tokens per second: 4428.17 | Training tokens per second (%): 55.27 | MFU (%): 0.55 | TFLOPs: 5.4613790 | Fwd time: 0.0307311 | Bck time: 0.0484545
+2025-05-22 17:35:07,330 - root - INFO - Step: 10 | Loss: 12.00 | Tokens per second: 4586.26 | Training tokens per second (%): 94.18 | MFU (%): 0.57 | TFLOPs: 5.6563528 | Fwd time: 0.0334967 | Bck time: 0.0480784
+2025-05-22 17:35:07,897 - root - INFO - Step: 15 | Loss: 11.95 | Tokens per second: 4521.79 | Training tokens per second (%): 74.34 | MFU (%): 0.56 | TFLOPs: 5.5768317 | Fwd time: 0.0333294 | Bck time: 0.0481008
+2025-05-22 17:35:08,469 - root - INFO - Step: 20 | Loss: 11.98 | Tokens per second: 4484.02 | Training tokens per second (%): 93.36 | MFU (%): 0.56 | TFLOPs: 5.5302562 | Fwd time: 0.0335161 | Bck time: 0.0477415
+2025-05-22 17:35:09,031 - root - INFO - Step: 25 | Loss: 11.92 | Tokens per second: 4565.01 | Training tokens per second (%): 90.82 | MFU (%): 0.57 | TFLOPs: 5.6301405 | Fwd time: 0.0338779 | Bck time: 0.0481832
+2025-05-22 17:35:09,591 - root - INFO - Step: 30 | Loss: 11.91 | Tokens per second: 4570.99 | Training tokens per second (%): 77.46 | MFU (%): 0.57 | TFLOPs: 5.6375186 | Fwd time: 0.0327682 | Bck time: 0.0484453
+2025-05-22 17:35:10,147 - root - INFO - Step: 35 | Loss: 11.91 | Tokens per second: 4612.06 | Training tokens per second (%): 76.33 | MFU (%): 0.58 | TFLOPs: 5.6881666 | Fwd time: 0.0330101 | Bck time: 0.0479058
+2025-05-22 17:35:10,704 - root - INFO - Step: 40 | Loss: 11.90 | Tokens per second: 4607.89 | Training tokens per second (%): 71.41 | MFU (%): 0.57 | TFLOPs: 5.6830247 | Fwd time: 0.0331511 | Bck time: 0.0477235
+2025-05-22 17:35:11,261 - root - INFO - Step: 45 | Loss: 11.82 | Tokens per second: 4597.25 | Training tokens per second (%): 87.07 | MFU (%): 0.57 | TFLOPs: 5.6699022 | Fwd time: 0.0332495 | Bck time: 0.0482858
+2025-05-22 17:35:11,817 - root - INFO - Step: 50 | Loss: 11.79 | Tokens per second: 4608.60 | Training tokens per second (%): 61.41 | MFU (%): 0.57 | TFLOPs: 5.6838981 | Fwd time: 0.0331682 | Bck time: 0.0479620
+2025-05-22 17:35:12,380 - root - INFO - Step: 55 | Loss: 11.92 | Tokens per second: 4555.83 | Training tokens per second (%): 89.34 | MFU (%): 0.57 | TFLOPs: 5.6188171 | Fwd time: 0.0337483 | Bck time: 0.0473211
+2025-05-22 17:35:12,940 - root - INFO - Step: 60 | Loss: 11.91 | Tokens per second: 4575.67 | Training tokens per second (%): 99.53 | MFU (%): 0.57 | TFLOPs: 5.6432885 | Fwd time: 0.0330596 | Bck time: 0.0477265
+2025-05-22 17:35:13,500 - root - INFO - Step: 65 | Loss: 11.82 | Tokens per second: 4578.42 | Training tokens per second (%): 89.88 | MFU (%): 0.57 | TFLOPs: 5.6466779 | Fwd time: 0.0336430 | Bck time: 0.0472142
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/iopsstor/scratch/cscs/bkundu/lsai-merger/LSAI-Checkpointing/training/train_checkp.py", line 245, in <module>
+    train(args)
+  File "/iopsstor/scratch/cscs/bkundu/lsai-merger/LSAI-Checkpointing/training/train_checkp.py", line 182, in train
+    loss.backward()
+  File "/usr/local/lib/python3.12/dist-packages/torch/_tensor.py", line 626, in backward
+    torch.autograd.backward(
+  File "/usr/local/lib/python3.12/dist-packages/torch/autograd/__init__.py", line 347, in backward
+    _engine_run_backward(
+  File "/usr/local/lib/python3.12/dist-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

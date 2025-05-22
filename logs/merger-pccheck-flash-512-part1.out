@@ -1,0 +1,238 @@
+2025-05-22 17:40:49,504 - root - INFO - Experiment args: Namespace(dataset='/capstor/store/cscs/ethz/large-sc/datasets/train_data.parquet', tokenizer_name_or_path='unsloth/Mistral-Nemo-Base-2407-bnb-4bit', sequence_length=512, batch_size=1, fused_optimizer=False, learning_rate=1e-05, lr_warmup_steps=10, training_steps=1000, logging_frequency=5, profile=False, profile_step_start=10, profile_step_end=12, grad_max_norm=1, model_dtype='bf16', compile=False, seed=4, checkpoint_dir='/iopsstor/scratch/cscs/bkundu/lsai-merger/chkpts', loss_file='/iopsstor/scratch/cscs/bkundu/lsai-merger/results/bf16/loss-pccheck-flash-512-part1.csv', checkpoint_freq=100, max_async=1, warmup=3, load_checkpoint=False, non_blocking=False)
+2025-05-22 17:40:49,507 - root - INFO - Setting up DataLoaders...
+2025-05-22 17:40:50,914 - root - INFO - Setting up Model...
+Model size: 255885824, Optimizer size: 511771940, Total size: 767657764
+BSIZE IS 767657764
+At checkpoint, bsize is 767657764
+2025-05-22 17:41:01,235 - root - INFO - Checkpointing warmup done
+2025-05-22 17:41:01,236 - root - INFO - ------------------------------------------------------------Starting training!
+2025-05-22 17:41:01,578 - root - INFO - Step: 1 | Loss: 11.87 | Tokens per second: 1500.36 | Training tokens per second (%): 100.00 | MFU (%): 0.19 | TFLOPs: 1.85 | Fwd time: 0.1824017 | Bck time: 0.0807864
+2025-05-22 17:41:01,987 - root - INFO - Step: 5 | Loss: 11.97 | Tokens per second: 5019.18 | Training tokens per second (%): 55.27 | MFU (%): 0.63 | TFLOPs: 6.19 | Fwd time: 0.0280636 | Bck time: 0.0431932
+2025-05-22 17:41:02,496 - root - INFO - Step: 10 | Loss: 12.00 | Tokens per second: 5036.85 | Training tokens per second (%): 94.18 | MFU (%): 0.63 | TFLOPs: 6.21 | Fwd time: 0.0301210 | Bck time: 0.0427610
+2025-05-22 17:41:03,011 - root - INFO - Step: 15 | Loss: 11.95 | Tokens per second: 4972.89 | Training tokens per second (%): 74.34 | MFU (%): 0.62 | TFLOPs: 6.13 | Fwd time: 0.0296165 | Bck time: 0.0434444
+2025-05-22 17:41:03,531 - root - INFO - Step: 20 | Loss: 11.98 | Tokens per second: 4937.01 | Training tokens per second (%): 93.36 | MFU (%): 0.62 | TFLOPs: 6.09 | Fwd time: 0.0305346 | Bck time: 0.0430162
+2025-05-22 17:41:04,042 - root - INFO - Step: 25 | Loss: 11.92 | Tokens per second: 5011.48 | Training tokens per second (%): 90.82 | MFU (%): 0.62 | TFLOPs: 6.18 | Fwd time: 0.0306171 | Bck time: 0.0428212
+2025-05-22 17:41:04,558 - root - INFO - Step: 30 | Loss: 11.91 | Tokens per second: 4967.33 | Training tokens per second (%): 77.46 | MFU (%): 0.62 | TFLOPs: 6.13 | Fwd time: 0.0301817 | Bck time: 0.0436821
+2025-05-22 17:41:05,073 - root - INFO - Step: 35 | Loss: 11.91 | Tokens per second: 4984.08 | Training tokens per second (%): 76.33 | MFU (%): 0.62 | TFLOPs: 6.15 | Fwd time: 0.0312722 | Bck time: 0.0444552
+2025-05-22 17:41:05,583 - root - INFO - Step: 40 | Loss: 11.90 | Tokens per second: 5021.51 | Training tokens per second (%): 71.41 | MFU (%): 0.63 | TFLOPs: 6.19 | Fwd time: 0.0302017 | Bck time: 0.0436163
+2025-05-22 17:41:06,099 - root - INFO - Step: 45 | Loss: 11.81 | Tokens per second: 4974.16 | Training tokens per second (%): 87.07 | MFU (%): 0.62 | TFLOPs: 6.13 | Fwd time: 0.0309777 | Bck time: 0.0440914
+2025-05-22 17:41:06,610 - root - INFO - Step: 50 | Loss: 11.79 | Tokens per second: 5017.21 | Training tokens per second (%): 61.41 | MFU (%): 0.63 | TFLOPs: 6.19 | Fwd time: 0.0298525 | Bck time: 0.0432682
+2025-05-22 17:41:07,127 - root - INFO - Step: 55 | Loss: 11.92 | Tokens per second: 4960.48 | Training tokens per second (%): 89.34 | MFU (%): 0.62 | TFLOPs: 6.12 | Fwd time: 0.0308401 | Bck time: 0.0432078
+2025-05-22 17:41:07,645 - root - INFO - Step: 60 | Loss: 11.91 | Tokens per second: 4942.92 | Training tokens per second (%): 99.53 | MFU (%): 0.62 | TFLOPs: 6.10 | Fwd time: 0.0302232 | Bck time: 0.0436686
+2025-05-22 17:41:08,162 - root - INFO - Step: 65 | Loss: 11.82 | Tokens per second: 4956.78 | Training tokens per second (%): 89.88 | MFU (%): 0.62 | TFLOPs: 6.11 | Fwd time: 0.0303465 | Bck time: 0.0438960
+2025-05-22 17:41:08,684 - root - INFO - Step: 70 | Loss: 11.80 | Tokens per second: 4918.46 | Training tokens per second (%): 59.14 | MFU (%): 0.61 | TFLOPs: 6.07 | Fwd time: 0.0310553 | Bck time: 0.0436247
+2025-05-22 17:41:09,196 - root - INFO - Step: 75 | Loss: 11.71 | Tokens per second: 5002.33 | Training tokens per second (%): 73.24 | MFU (%): 0.62 | TFLOPs: 6.17 | Fwd time: 0.0302082 | Bck time: 0.0445781
+2025-05-22 17:41:09,714 - root - INFO - Step: 80 | Loss: 11.70 | Tokens per second: 4951.93 | Training tokens per second (%): 75.94 | MFU (%): 0.62 | TFLOPs: 6.11 | Fwd time: 0.0308105 | Bck time: 0.0442948
+2025-05-22 17:41:10,227 - root - INFO - Step: 85 | Loss: 11.85 | Tokens per second: 4992.36 | Training tokens per second (%): 94.53 | MFU (%): 0.62 | TFLOPs: 6.16 | Fwd time: 0.0301576 | Bck time: 0.0438625
+2025-05-22 17:41:10,764 - root - INFO - Step: 90 | Loss: 11.81 | Tokens per second: 4775.86 | Training tokens per second (%): 100.00 | MFU (%): 0.60 | TFLOPs: 5.89 | Fwd time: 0.0291368 | Bck time: 0.0443798
+2025-05-22 17:41:11,338 - root - INFO - Step: 95 | Loss: 11.74 | Tokens per second: 4466.81 | Training tokens per second (%): 96.80 | MFU (%): 0.56 | TFLOPs: 5.51 | Fwd time: 0.0307996 | Bck time: 0.0453061
+2025-05-22 17:41:11,904 - root - INFO - Step: 100 | Loss: 11.83 | Tokens per second: 4532.08 | Training tokens per second (%): 100.00 | MFU (%): 0.57 | TFLOPs: 5.59 | Fwd time: 0.0307705 | Bck time: 0.0443186
+2025-05-22 17:41:11,935 - root - INFO - Random states checkpoint saved to /iopsstor/scratch/cscs/bkundu/lsai-merger/chkpts/rng_states.pt
+2025-05-22 17:41:11,937 - root - INFO - Checkpoint saved to /iopsstor/scratch/cscs/bkundu/lsai-merger/chkpts
+2025-05-22 17:41:12,478 - root - INFO - Step: 105 | Loss: 11.77 | Tokens per second: 4462.64 | Training tokens per second (%): 72.23 | MFU (%): 0.56 | TFLOPs: 5.50 | Fwd time: 0.0309329 | Bck time: 0.0471471
+2025-05-22 17:41:13,040 - root - INFO - Step: 110 | Loss: 11.75 | Tokens per second: 4561.20 | Training tokens per second (%): 66.09 | MFU (%): 0.57 | TFLOPs: 5.63 | Fwd time: 0.0321006 | Bck time: 0.0459659
+2025-05-22 17:41:13,570 - root - INFO - Step: 115 | Loss: 11.77 | Tokens per second: 4836.82 | Training tokens per second (%): 79.80 | MFU (%): 0.60 | TFLOPs: 5.97 | Fwd time: 0.0302224 | Bck time: 0.0432723
+2025-05-22 17:41:14,080 - root - INFO - Step: 120 | Loss: 11.65 | Tokens per second: 5033.08 | Training tokens per second (%): 88.59 | MFU (%): 0.63 | TFLOPs: 6.21 | Fwd time: 0.0300290 | Bck time: 0.0438990
+2025-05-22 17:41:14,590 - root - INFO - Step: 125 | Loss: 11.75 | Tokens per second: 5022.79 | Training tokens per second (%): 81.99 | MFU (%): 0.63 | TFLOPs: 6.19 | Fwd time: 0.0296458 | Bck time: 0.0434342
+2025-05-22 17:41:15,098 - root - INFO - Step: 130 | Loss: 11.82 | Tokens per second: 5046.20 | Training tokens per second (%): 64.53 | MFU (%): 0.63 | TFLOPs: 6.22 | Fwd time: 0.0301090 | Bck time: 0.0433634
+2025-05-22 17:41:15,605 - root - INFO - Step: 135 | Loss: 11.63 | Tokens per second: 5058.42 | Training tokens per second (%): 83.67 | MFU (%): 0.63 | TFLOPs: 6.24 | Fwd time: 0.0290141 | Bck time: 0.0429135
+2025-05-22 17:41:16,113 - root - INFO - Step: 140 | Loss: 11.70 | Tokens per second: 5046.88 | Training tokens per second (%): 63.28 | MFU (%): 0.63 | TFLOPs: 6.22 | Fwd time: 0.0299976 | Bck time: 0.0435899
+2025-05-22 17:41:16,621 - root - INFO - Step: 145 | Loss: 11.61 | Tokens per second: 5042.80 | Training tokens per second (%): 79.80 | MFU (%): 0.63 | TFLOPs: 6.22 | Fwd time: 0.0304016 | Bck time: 0.0430673
+2025-05-22 17:41:17,130 - root - INFO - Step: 150 | Loss: 11.64 | Tokens per second: 5039.22 | Training tokens per second (%): 89.22 | MFU (%): 0.63 | TFLOPs: 6.21 | Fwd time: 0.0305953 | Bck time: 0.0437525
+2025-05-22 17:41:17,647 - root - INFO - Step: 155 | Loss: 11.67 | Tokens per second: 4959.70 | Training tokens per second (%): 100.00 | MFU (%): 0.62 | TFLOPs: 6.12 | Fwd time: 0.0297218 | Bck time: 0.0435168
+2025-05-22 17:41:18,159 - root - INFO - Step: 160 | Loss: 11.53 | Tokens per second: 5005.36 | Training tokens per second (%): 90.04 | MFU (%): 0.62 | TFLOPs: 6.17 | Fwd time: 0.0302833 | Bck time: 0.0439285
+2025-05-22 17:41:18,689 - root - INFO - Step: 165 | Loss: 11.53 | Tokens per second: 4839.90 | Training tokens per second (%): 71.48 | MFU (%): 0.60 | TFLOPs: 5.97 | Fwd time: 0.0296979 | Bck time: 0.0436755
+2025-05-22 17:41:19,212 - root - INFO - Step: 170 | Loss: 11.65 | Tokens per second: 4901.82 | Training tokens per second (%): 88.75 | MFU (%): 0.61 | TFLOPs: 6.05 | Fwd time: 0.0308468 | Bck time: 0.0439883
+2025-05-22 17:41:19,724 - root - INFO - Step: 175 | Loss: 11.67 | Tokens per second: 5004.15 | Training tokens per second (%): 75.47 | MFU (%): 0.62 | TFLOPs: 6.17 | Fwd time: 0.0298952 | Bck time: 0.0440466
+2025-05-22 17:41:20,234 - root - INFO - Step: 180 | Loss: 11.57 | Tokens per second: 5032.18 | Training tokens per second (%): 85.59 | MFU (%): 0.63 | TFLOPs: 6.21 | Fwd time: 0.0297560 | Bck time: 0.0435482
+2025-05-22 17:41:20,744 - root - INFO - Step: 185 | Loss: 11.73 | Tokens per second: 5020.05 | Training tokens per second (%): 74.41 | MFU (%): 0.63 | TFLOPs: 6.19 | Fwd time: 0.0290358 | Bck time: 0.0433134
+2025-05-22 17:41:21,250 - root - INFO - Step: 190 | Loss: 11.61 | Tokens per second: 5076.57 | Training tokens per second (%): 85.16 | MFU (%): 0.63 | TFLOPs: 6.26 | Fwd time: 0.0296770 | Bck time: 0.0426592
+2025-05-22 17:41:21,779 - root - INFO - Step: 195 | Loss: 11.46 | Tokens per second: 4842.07 | Training tokens per second (%): 61.33 | MFU (%): 0.60 | TFLOPs: 5.97 | Fwd time: 0.0304565 | Bck time: 0.0432343
+2025-05-22 17:41:22,292 - root - INFO - Step: 200 | Loss: 11.65 | Tokens per second: 4993.03 | Training tokens per second (%): 74.30 | MFU (%): 0.62 | TFLOPs: 6.16 | Fwd time: 0.0303845 | Bck time: 0.0434900
+2025-05-22 17:41:22,330 - root - INFO - Random states checkpoint saved to /iopsstor/scratch/cscs/bkundu/lsai-merger/chkpts/rng_states.pt
+2025-05-22 17:41:22,331 - root - INFO - Checkpoint saved to /iopsstor/scratch/cscs/bkundu/lsai-merger/chkpts
+2025-05-22 17:41:22,852 - root - INFO - Step: 205 | Loss: 11.43 | Tokens per second: 4578.62 | Training tokens per second (%): 70.39 | MFU (%): 0.57 | TFLOPs: 5.65 | Fwd time: 0.0295215 | Bck time: 0.0421719
+2025-05-22 17:41:23,391 - root - INFO - Step: 210 | Loss: 11.50 | Tokens per second: 4754.47 | Training tokens per second (%): 94.26 | MFU (%): 0.59 | TFLOPs: 5.86 | Fwd time: 0.0323877 | Bck time: 0.0461204
+2025-05-22 17:41:23,922 - root - INFO - Step: 215 | Loss: 11.35 | Tokens per second: 4834.91 | Training tokens per second (%): 72.15 | MFU (%): 0.60 | TFLOPs: 5.96 | Fwd time: 0.0296053 | Bck time: 0.0443183
+2025-05-22 17:41:24,425 - root - INFO - Step: 220 | Loss: 11.56 | Tokens per second: 5091.17 | Training tokens per second (%): 70.78 | MFU (%): 0.63 | TFLOPs: 6.28 | Fwd time: 0.0300409 | Bck time: 0.0443196
+2025-05-22 17:41:24,936 - root - INFO - Step: 225 | Loss: 11.45 | Tokens per second: 5020.76 | Training tokens per second (%): 79.10 | MFU (%): 0.63 | TFLOPs: 6.19 | Fwd time: 0.0299790 | Bck time: 0.0435413
+2025-05-22 17:41:25,441 - root - INFO - Step: 230 | Loss: 11.35 | Tokens per second: 5073.96 | Training tokens per second (%): 50.16 | MFU (%): 0.63 | TFLOPs: 6.26 | Fwd time: 0.0302104 | Bck time: 0.0443915
+2025-05-22 17:41:25,947 - root - INFO - Step: 235 | Loss: 11.47 | Tokens per second: 5068.38 | Training tokens per second (%): 64.38 | MFU (%): 0.63 | TFLOPs: 6.25 | Fwd time: 0.0281954 | Bck time: 0.0436909
+2025-05-22 17:41:26,460 - root - INFO - Step: 240 | Loss: 11.42 | Tokens per second: 5003.19 | Training tokens per second (%): 92.07 | MFU (%): 0.62 | TFLOPs: 6.17 | Fwd time: 0.0303084 | Bck time: 0.0440022
+2025-05-22 17:41:26,976 - root - INFO - Step: 245 | Loss: 11.50 | Tokens per second: 4969.16 | Training tokens per second (%): 74.38 | MFU (%): 0.62 | TFLOPs: 6.13 | Fwd time: 0.0298324 | Bck time: 0.0433914
+2025-05-22 17:41:27,501 - root - INFO - Step: 250 | Loss: 11.41 | Tokens per second: 4878.07 | Training tokens per second (%): 67.42 | MFU (%): 0.61 | TFLOPs: 6.02 | Fwd time: 0.0300911 | Bck time: 0.0442942
+2025-05-22 17:41:28,010 - root - INFO - Step: 255 | Loss: 11.57 | Tokens per second: 5033.82 | Training tokens per second (%): 64.53 | MFU (%): 0.63 | TFLOPs: 6.21 | Fwd time: 0.0302558 | Bck time: 0.0438326
+2025-05-22 17:41:28,529 - root - INFO - Step: 260 | Loss: 11.62 | Tokens per second: 4942.91 | Training tokens per second (%): 81.21 | MFU (%): 0.62 | TFLOPs: 6.10 | Fwd time: 0.0308593 | Bck time: 0.0435501
+2025-05-22 17:41:29,036 - root - INFO - Step: 265 | Loss: 11.49 | Tokens per second: 5052.68 | Training tokens per second (%): 81.13 | MFU (%): 0.63 | TFLOPs: 6.23 | Fwd time: 0.0292606 | Bck time: 0.0440382
+2025-05-22 17:41:29,546 - root - INFO - Step: 270 | Loss: 11.39 | Tokens per second: 5033.83 | Training tokens per second (%): 91.60 | MFU (%): 0.63 | TFLOPs: 6.21 | Fwd time: 0.0304833 | Bck time: 0.0432095
+2025-05-22 17:41:30,050 - root - INFO - Step: 275 | Loss: 11.48 | Tokens per second: 5079.71 | Training tokens per second (%): 74.10 | MFU (%): 0.63 | TFLOPs: 6.26 | Fwd time: 0.0296930 | Bck time: 0.0423234
+2025-05-22 17:41:30,563 - root - INFO - Step: 280 | Loss: 11.50 | Tokens per second: 5006.33 | Training tokens per second (%): 91.56 | MFU (%): 0.62 | TFLOPs: 6.17 | Fwd time: 0.0307032 | Bck time: 0.0430867
+2025-05-22 17:41:31,072 - root - INFO - Step: 285 | Loss: 11.49 | Tokens per second: 5034.81 | Training tokens per second (%): 100.00 | MFU (%): 0.63 | TFLOPs: 6.21 | Fwd time: 0.0292863 | Bck time: 0.0433325
+2025-05-22 17:41:31,582 - root - INFO - Step: 290 | Loss: 11.54 | Tokens per second: 5023.50 | Training tokens per second (%): 88.28 | MFU (%): 0.63 | TFLOPs: 6.20 | Fwd time: 0.0296863 | Bck time: 0.0440711
+2025-05-22 17:41:32,091 - root - INFO - Step: 295 | Loss: 11.35 | Tokens per second: 5039.12 | Training tokens per second (%): 71.84 | MFU (%): 0.63 | TFLOPs: 6.21 | Fwd time: 0.0300671 | Bck time: 0.0435432
+2025-05-22 17:41:32,614 - root - INFO - Step: 300 | Loss: 11.47 | Tokens per second: 4897.78 | Training tokens per second (%): 86.29 | MFU (%): 0.61 | TFLOPs: 6.04 | Fwd time: 0.0294300 | Bck time: 0.0439030
+2025-05-22 17:41:32,649 - root - INFO - Random states checkpoint saved to /iopsstor/scratch/cscs/bkundu/lsai-merger/chkpts/rng_states.pt
+2025-05-22 17:41:32,650 - root - INFO - Checkpoint saved to /iopsstor/scratch/cscs/bkundu/lsai-merger/chkpts
+2025-05-22 17:41:33,172 - root - INFO - Step: 305 | Loss: 11.49 | Tokens per second: 4597.24 | Training tokens per second (%): 84.22 | MFU (%): 0.57 | TFLOPs: 5.67 | Fwd time: 0.0292541 | Bck time: 0.0446850
+2025-05-22 17:41:33,684 - root - INFO - Step: 310 | Loss: 11.45 | Tokens per second: 5007.46 | Training tokens per second (%): 77.85 | MFU (%): 0.62 | TFLOPs: 6.18 | Fwd time: 0.0298529 | Bck time: 0.0436527
+2025-05-22 17:41:34,195 - root - INFO - Step: 315 | Loss: 11.19 | Tokens per second: 5018.48 | Training tokens per second (%): 76.88 | MFU (%): 0.63 | TFLOPs: 6.19 | Fwd time: 0.0289694 | Bck time: 0.0430423
+2025-05-22 17:41:34,707 - root - INFO - Step: 320 | Loss: 11.29 | Tokens per second: 5002.75 | Training tokens per second (%): 91.80 | MFU (%): 0.62 | TFLOPs: 6.17 | Fwd time: 0.0306834 | Bck time: 0.0432056
+2025-05-22 17:41:35,216 - root - INFO - Step: 325 | Loss: 11.45 | Tokens per second: 5041.75 | Training tokens per second (%): 70.12 | MFU (%): 0.63 | TFLOPs: 6.22 | Fwd time: 0.0294959 | Bck time: 0.0431718
+2025-05-22 17:41:35,720 - root - INFO - Step: 330 | Loss: 11.25 | Tokens per second: 5085.36 | Training tokens per second (%): 78.75 | MFU (%): 0.63 | TFLOPs: 6.27 | Fwd time: 0.0286808 | Bck time: 0.0429635
+2025-05-22 17:41:36,220 - root - INFO - Step: 335 | Loss: 11.43 | Tokens per second: 5125.07 | Training tokens per second (%): 48.83 | MFU (%): 0.64 | TFLOPs: 6.32 | Fwd time: 0.0290845 | Bck time: 0.0434030
+2025-05-22 17:41:36,726 - root - INFO - Step: 340 | Loss: 11.46 | Tokens per second: 5065.07 | Training tokens per second (%): 87.97 | MFU (%): 0.63 | TFLOPs: 6.25 | Fwd time: 0.0293726 | Bck time: 0.0444118
+2025-05-22 17:41:37,234 - root - INFO - Step: 345 | Loss: 11.29 | Tokens per second: 5049.49 | Training tokens per second (%): 96.64 | MFU (%): 0.63 | TFLOPs: 6.23 | Fwd time: 0.0296617 | Bck time: 0.0435749
+2025-05-22 17:41:37,738 - root - INFO - Step: 350 | Loss: 11.47 | Tokens per second: 5083.38 | Training tokens per second (%): 80.62 | MFU (%): 0.63 | TFLOPs: 6.27 | Fwd time: 0.0301926 | Bck time: 0.0434119
+2025-05-22 17:41:38,237 - root - INFO - Step: 355 | Loss: 11.27 | Tokens per second: 5146.86 | Training tokens per second (%): 62.03 | MFU (%): 0.64 | TFLOPs: 6.35 | Fwd time: 0.0293190 | Bck time: 0.0427027
+2025-05-22 17:41:38,739 - root - INFO - Step: 360 | Loss: 11.13 | Tokens per second: 5103.96 | Training tokens per second (%): 98.63 | MFU (%): 0.64 | TFLOPs: 6.29 | Fwd time: 0.0297233 | Bck time: 0.0415947
+2025-05-22 17:41:39,243 - root - INFO - Step: 365 | Loss: 11.35 | Tokens per second: 5083.20 | Training tokens per second (%): 100.00 | MFU (%): 0.63 | TFLOPs: 6.27 | Fwd time: 0.0287131 | Bck time: 0.0433320
+2025-05-22 17:41:39,749 - root - INFO - Step: 370 | Loss: 11.39 | Tokens per second: 5070.83 | Training tokens per second (%): 100.00 | MFU (%): 0.63 | TFLOPs: 6.25 | Fwd time: 0.0295600 | Bck time: 0.0434204
+2025-05-22 17:41:40,267 - root - INFO - Step: 375 | Loss: 11.37 | Tokens per second: 4949.78 | Training tokens per second (%): 100.00 | MFU (%): 0.62 | TFLOPs: 6.10 | Fwd time: 0.0284113 | Bck time: 0.0440891
+2025-05-22 17:41:40,788 - root - INFO - Step: 380 | Loss: 11.20 | Tokens per second: 4915.92 | Training tokens per second (%): 78.59 | MFU (%): 0.61 | TFLOPs: 6.06 | Fwd time: 0.0296202 | Bck time: 0.0430596
+2025-05-22 17:41:41,291 - root - INFO - Step: 385 | Loss: 11.28 | Tokens per second: 5100.99 | Training tokens per second (%): 76.68 | MFU (%): 0.64 | TFLOPs: 6.29 | Fwd time: 0.0282219 | Bck time: 0.0434174
+2025-05-22 17:41:41,800 - root - INFO - Step: 390 | Loss: 11.28 | Tokens per second: 5031.03 | Training tokens per second (%): 76.02 | MFU (%): 0.63 | TFLOPs: 6.20 | Fwd time: 0.0309666 | Bck time: 0.0432718
+2025-05-22 17:41:42,318 - root - INFO - Step: 395 | Loss: 11.26 | Tokens per second: 4955.70 | Training tokens per second (%): 89.88 | MFU (%): 0.62 | TFLOPs: 6.11 | Fwd time: 0.0295996 | Bck time: 0.0428807
+2025-05-22 17:41:42,839 - root - INFO - Step: 400 | Loss: 11.23 | Tokens per second: 4916.77 | Training tokens per second (%): 75.31 | MFU (%): 0.61 | TFLOPs: 6.06 | Fwd time: 0.0316896 | Bck time: 0.0429585
+2025-05-22 17:41:42,875 - root - INFO - Random states checkpoint saved to /iopsstor/scratch/cscs/bkundu/lsai-merger/chkpts/rng_states.pt
+2025-05-22 17:41:42,876 - root - INFO - Checkpoint saved to /iopsstor/scratch/cscs/bkundu/lsai-merger/chkpts
+2025-05-22 17:41:43,394 - root - INFO - Step: 405 | Loss: 11.32 | Tokens per second: 4620.61 | Training tokens per second (%): 76.80 | MFU (%): 0.58 | TFLOPs: 5.70 | Fwd time: 0.0310381 | Bck time: 0.0432616
+2025-05-22 17:41:43,900 - root - INFO - Step: 410 | Loss: 11.22 | Tokens per second: 5065.59 | Training tokens per second (%): 94.88 | MFU (%): 0.63 | TFLOPs: 6.25 | Fwd time: 0.0316398 | Bck time: 0.0394719
+2025-05-22 17:41:44,401 - root - INFO - Step: 415 | Loss: 11.17 | Tokens per second: 5119.12 | Training tokens per second (%): 86.99 | MFU (%): 0.64 | TFLOPs: 6.31 | Fwd time: 0.0323959 | Bck time: 0.0395048
+Process Process-1:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/iopsstor/scratch/cscs/bkundu/lsai-merger/LSAI-Checkpointing/training/train_pccheck.py", line 215, in <module>
+    train(args)
+  File "/iopsstor/scratch/cscs/bkundu/lsai-merger/LSAI-Checkpointing/training/train_pccheck.py", line 171, in train
+    optimizer.step()
+  File "/usr/local/lib/python3.12/dist-packages/torch/optim/lr_scheduler.py", line 140, in wrapper
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/iopsstor/scratch/cscs/bkundu/lsai-merger/LSAI-Checkpointing/checkpointing/pccheck/chk_checkpoint_pipeline.py", line 329, in start_chk
+    with lock:
+KeyboardInterrupt
+total_size: 767657764, bsize: 767657764, ratio: 2.0
+767657764 2 False
+Save checkpoint with process 0
+************** New checkpoint at position 0
+GPU copy took 38.919687271118164 ms
+CPU copy took 1252.774715423584 ms
+---------------------- [PERF] Single Checkpoint time is 1.311945915222168 sec, average is 1.3119428157806396
+Save checkpoint with process 0
+************** New checkpoint at position 1
+GPU copy took 36.211252212524414 ms
+CPU copy took 1260.6313228607178 ms
+---------------------- [PERF] Single Checkpoint time is 1.3166351318359375 sec, average is 1.3142871856689453
+Save checkpoint with process 0
+************** New checkpoint at position 0
+GPU copy took 37.14895248413086 ms
+CPU copy took 895.8282470703125 ms
+---------------------- [PERF] Single Checkpoint time is 0.9531092643737793 sec, average is 1.3119428157806396
+Save checkpoint with process 0
+************** New checkpoint at position 1
+GPU copy took 39.975881576538086 ms
+CPU copy took 881.6432952880859 ms
+---------------------- [PERF] Single Checkpoint time is 0.9417281150817871 sec, average is 1.1325252056121826
+PR_ADDR_DATA is 0x400500280000, PR_ADDR is 0x400500000000, PEER_CHECK_ADDR is 0x400500080000
+--------------- init enqueue: 0
+--------------- init enqueue: 1
+Call dram.alloc, num_batches is 2, batch_size_floats is 767657764
+------------------------- is_distributed is 0, rank is 0
+Parall_iter 0, Write new metadata at address 0x400500180000
+------------------------- savenvmNew, is_distributed is 0, total_size is 767657764
+At savenvmNew, tid is 76, parall_iter is 0, num_threads is 1, last counter is 0, curr_counter is 1
+Writing offset is 58224, parall_iter_offset is 0
+start_pr_arr is 0x400500280000, curr_pr_arr is 0x400500280000, batch_size is 767657764, batch_num is 1
+Save checkpoint - create threads!
+size_for_thread_i is 767657764
+CPU: 1, CPU USE: 2
+At savenvm_thread_nd id is 1, sz is 767657764, start addr is 0x400500280000!
+Thread ID: 1, savenvm_thread_nd took 1190.725220 ms
+Thread ID: 1, set_cpu took 0.077374 ms
+Threads took 1206.924378 ms
+MSYNC 3070631056 TOOK 40.249979 ms
+CAS was successful! new counter is 1, is_distributed is 0
+******** checkp_info saved in 0x400500180000, curr_checkpoint is 0x400500180000
+0, 1
+Parall_iter 1, Write new metadata at address 0x400500200000
+------------------------- savenvmNew, is_distributed is 0, total_size is 767657764
+At savenvmNew, tid is 96, parall_iter is 1, num_threads is 1, last counter is 1, curr_counter is 2
+Writing offset is 58224, parall_iter_offset is 767672320
+start_pr_arr is 0x4005b72f0000, curr_pr_arr is 0x4005b72f0000, batch_size is 767657764, batch_num is 1
+Save checkpoint - create threads!
+size_for_thread_i is 767657764
+CPU: 2, CPU USE: 3
+At savenvm_thread_nd id is 2, sz is 767657764, start addr is 0x4005b72f0000!
+Thread ID: 2, savenvm_thread_nd took 1183.384995 ms
+Thread ID: 2, set_cpu took 0.064702 ms
+Threads took 1202.117451 ms
+MSYNC 3070631056 TOOK 52.989208 ms
+CAS was successful! new counter is 2, is_distributed is 0
+******** checkp_info saved in 0x400500200000, curr_checkpoint is 0x400500200000
+1, 2
+Parall_iter 0, Write new metadata at address 0x400500180000
+------------------------- savenvmNew, is_distributed is 0, total_size is 767657764
+At savenvmNew, tid is 11, parall_iter is 0, num_threads is 1, last counter is 2, curr_counter is 3
+Writing offset is 58224, parall_iter_offset is 0
+start_pr_arr is 0x400500280000, curr_pr_arr is 0x400500280000, batch_size is 767657764, batch_num is 1
+Save checkpoint - create threads!
+size_for_thread_i is 767657764
+CPU: 1, CPU USE: 2
+At savenvm_thread_nd id is 1, sz is 767657764, start addr is 0x400500280000!
+Thread ID: 1, savenvm_thread_nd took 853.120742 ms
+Thread ID: 1, set_cpu took 0.073790 ms
+Threads took 870.943030 ms
+MSYNC 3070631056 TOOK 19.410462 ms
+CAS was successful! new counter is 3, is_distributed is 0
+******** checkp_info saved in 0x400500180000, curr_checkpoint is 0x400500180000
+0, 3
+Parall_iter 1, Write new metadata at address 0x400500200000
+------------------------- savenvmNew, is_distributed is 0, total_size is 767657764
+At savenvmNew, tid is 36, parall_iter is 1, num_threads is 1, last counter is 3, curr_counter is 4
+Writing offset is 58224, parall_iter_offset is 767672320
+start_pr_arr is 0x4005b72f0000, curr_pr_arr is 0x4005b72f0000, batch_size is 767657764, batch_num is 1
+Save checkpoint - create threads!
+size_for_thread_i is 767657764
+CPU: 2, CPU USE: 3
+At savenvm_thread_nd id is 2, sz is 767657764, start addr is 0x4005b72f0000!
+Thread ID: 2, savenvm_thread_nd took 852.993707 ms
+Thread ID: 2, set_cpu took 0.056062 ms
+Threads took 855.900880 ms
+MSYNC 3070631056 TOOK 20.280738 ms
+CAS was successful! new counter is 4, is_distributed is 0
+******** checkp_info saved in 0x400500200000, curr_checkpoint is 0x400500200000
+1, 4
+    return func.__get__(opt, opt.__class__)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/optim/optimizer.py", line 494, in wrapper
+    out = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/optim/optimizer.py", line 92, in _use_grad
+    ret = func(self, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/optim/adamw.py", line 243, in step
+    adamw(
+  File "/usr/local/lib/python3.12/dist-packages/torch/optim/optimizer.py", line 155, in maybe_fallback
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/optim/adamw.py", line 875, in adamw
+    func(
+  File "/usr/local/lib/python3.12/dist-packages/torch/optim/adamw.py", line 425, in _single_tensor_adamw
+    exp_avg.lerp_(grad, 1 - device_beta1)
+KeyboardInterrupt
+Setting optimizer state...
+Setting model state...
+******************** CALL SAVE ********************
+Setting optimizer state...
+Setting model state...
+******************** CALL SAVE ********************
+Setting optimizer state...
+Setting model state...
+******************** CALL SAVE ********************
+Setting optimizer state...
+Setting model state...
+******************** CALL SAVE ********************
