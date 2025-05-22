@@ -8,14 +8,14 @@
 
 #SBATCH --account=a-large-sc
 #SBATCH --time=00:45:00
-#SBATCH --job-name=lsai-proj
-#SBATCH --output=/iopsstor/scratch/cscs/bkundu/lsai-merger/logs/info/%x-%j.out
+#SBATCH --job-name=lsai-merger
+#SBATCH --output=./logs/info/%x-%j.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --gpus-per-node=4
 #SBATCH --cpus-per-task=72
 #SBATCH --mem=256G
-#SBATCH --partition=debug
+#SBATCH --partition=normal
 #SBATCH --environment=/iopsstor/scratch/cscs/bkundu/lsai-merger/ngc_pt_jan.toml     # Vanilla 25.01 PyTorch NGC Image 
 #SBATCH --no-requeue	# Prevent Slurm to requeue the job if the execution crashes (e.g. node failure) so we don't loose the logs
 
@@ -24,10 +24,9 @@ set -eo pipefail
 
 echo "START TIME: $(date)"
 
-ASSIGNMENT_DIR="/iopsstor/scratch/cscs/$USER/lsai-proj"
 MERGER_DIR="/iopsstor/scratch/cscs/$USER/lsai-merger"
 
-cd $ASSIGNMENT_DIR
+cd $MERGER_DIR
 
 if [ ! -d ".venv" ]; then
     python -m venv --system-site-packages .venv
@@ -89,7 +88,7 @@ get_srun_outfile() {
 
 run_merger() {
     MODE="$1"
-    BENCH_NUMBER="$2"
+    SEQ_LEN="$2"
     TRAINING_ARGS="$3"
 
     [ -d "$MERGER_DIR/chkpts" ] || mkdir $MERGER_DIR/chkpts
@@ -116,22 +115,66 @@ run_merger() {
             export USE_FLASH_ATTENTION="1"
             out_file_prefix="$MODE-flash"
             if [ "$MODE" == "base" ]; then
-                time_out=105
+                if [ "$SEQ_LEN" == "2048" ]; then
+                    time_out=105
+                elif [ "$SEQ_LEN" == "1024" ]; then
+                    time_out=105
+                elif [ "$SEQ_LEN" == "512" ]; then
+                    time_out=90
+                elif [ "$SEQ_LEN" == "256" ]; then
+                    time_out=60
+                else
+                    echo "Unknown SEQ_LEN: $SEQ_LEN"
+                    exit 1
+                fi
             elif [ "$MODE" == "pccheck" ]; then
-                time_out=80
+                if [ "$SEQ_LEN" == "2048" ]; then
+                    time_out=80
+                elif [ "$SEQ_LEN" == "1024" ]; then
+                    time_out=80
+                elif [ "$SEQ_LEN" == "512" ]; then
+                    time_out=60
+                elif [ "$SEQ_LEN" == "256" ]; then
+                    time_out=60
+                else
+                    echo "Unknown SEQ_LEN: $SEQ_LEN"
+                    exit 1
+                fi
             fi
         else
             export USE_FLASH_ATTENTION="0"
             out_file_prefix="$MODE-torch"
             
             if [ "$MODE" == "base" ]; then
-                time_out=90
+                if [ "$SEQ_LEN" == "2048" ]; then
+                    time_out=90
+                elif [ "$SEQ_LEN" == "1024" ]; then
+                    time_out=90
+                elif [ "$SEQ_LEN" == "512" ]; then
+                    time_out=60
+                elif [ "$SEQ_LEN" == "256" ]; then
+                    time_out=60
+                else
+                    echo "Unknown SEQ_LEN: $SEQ_LEN"
+                    exit 1
+                fi
             elif [ "$MODE" == "pccheck" ]; then
-                time_out=85
+                if [ "$SEQ_LEN" == "2048" ]; then
+                    time_out=85
+                elif [ "$SEQ_LEN" == "1024" ]; then
+                    time_out=85
+                elif [ "$SEQ_LEN" == "512" ]; then
+                    time_out=60
+                elif [ "$SEQ_LEN" == "256" ]; then
+                    time_out=60
+                else
+                    echo "Unknown SEQ_LEN: $SEQ_LEN"
+                    exit 1
+                fi
             fi
         fi
 
-        srun_outfile=$(get_srun_outfile "$MERGER_DIR/logs" "$SRUN_OUTFILE_SUFFIX-$out_file_prefix" "$BENCH_NUMBER-part1")
+        srun_outfile=$(get_srun_outfile "$MERGER_DIR/logs" "$SRUN_OUTFILE_SUFFIX-$out_file_prefix" "$SEQ_LEN-part1")
 
         echo "Writing to: $srun_outfile"
 
@@ -142,10 +185,12 @@ run_merger() {
                               --seed 4 \
                               --model-dtype $DTYPE \
                               --checkpoint-dir $MERGER_DIR/chkpts \
+                              --sequence-length $SEQ_LEN \
+                              --logging-frequency 1 \
                               --checkpoint-freq 100"
 
         TRAINING_CMD="$TRAINING_BASE_CMD \
-                              --loss-file $MERGER_DIR/results/$DTYPE/loss-$out_file_prefix-$BENCH_NUMBER-part1.csv \
+                              --loss-file $MERGER_DIR/results/$DTYPE/loss-$out_file_prefix-$SEQ_LEN-part1.csv \
                               $TRAINING_ARGS"
         srun --output $srun_outfile \
              --cpus-per-task $SLURM_CPUS_PER_TASK \
@@ -153,12 +198,12 @@ run_merger() {
 
 
         
-        srun_outfile=$(get_srun_outfile "$MERGER_DIR/logs" "$SRUN_OUTFILE_SUFFIX-$out_file_prefix" "$BENCH_NUMBER-part2")
+        srun_outfile=$(get_srun_outfile "$MERGER_DIR/logs" "$SRUN_OUTFILE_SUFFIX-$out_file_prefix" "$SEQ_LEN-part2")
 
         echo "Writing to: $srun_outfile"
 
         TRAINING_CMD="$TRAINING_BASE_CMD \
-                              --loss-file $MERGER_DIR/results/$DTYPE/loss-$out_file_prefix-$BENCH_NUMBER-part2.csv \
+                              --loss-file $MERGER_DIR/results/$DTYPE/loss-$out_file_prefix-$SEQ_LEN-part2.csv \
                               --load-checkpoint \
                               $TRAINING_ARGS"
         srun --output $srun_outfile \
@@ -171,8 +216,8 @@ run_merger() {
 }
 
 
-SEQ_LEN=2048
-TRAIN_ARGS="--sequence-length $SEQ_LEN"
+SEQ_LEN=256
+TRAIN_ARGS=""
 
 run_merger "base" "$SEQ_LEN" "$TRAIN_ARGS"
 run_merger "pccheck" "$SEQ_LEN" "$TRAIN_ARGS"
