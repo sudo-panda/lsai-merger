@@ -120,7 +120,7 @@ run_merger() {
                 elif [ "$SEQ_LEN" == "1024" ]; then
                     time_out=105
                 elif [ "$SEQ_LEN" == "512" ]; then
-                    time_out=90
+                    time_out=85
                 elif [ "$SEQ_LEN" == "256" ]; then
                     time_out=60
                 else
@@ -186,7 +186,6 @@ run_merger() {
                               --model-dtype $DTYPE \
                               --checkpoint-dir $MERGER_DIR/chkpts \
                               --sequence-length $SEQ_LEN \
-                              --logging-frequency 1 \
                               --checkpoint-freq 100"
 
         TRAINING_CMD="$TRAINING_BASE_CMD \
@@ -221,5 +220,7 @@ TRAIN_ARGS=""
 
 run_merger "base" "$SEQ_LEN" "$TRAIN_ARGS"
 run_merger "pccheck" "$SEQ_LEN" "$TRAIN_ARGS"
+
+cd $MERGER_DIR/results && python plot_loss.py --seq-len $SEQ_LEN
 
 echo "END TIME: $(date)"
