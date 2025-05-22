@@ -1,2 +1,4 @@
 *.pt
 logs/info/*
+*env/
+core_*
