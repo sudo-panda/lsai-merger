@@ -172,7 +172,7 @@ run_merger() {
 
                     echo " > Attempt $attempt: scancel --signal=SIGKILL  $srun_step_id"
                     scancel --signal=SIGKILL "$srun_step_id" || true
-                    sleep 2
+                    sleep 1
                 done
                 break
             fi
@@ -222,11 +222,12 @@ run_merger() {
 
 SEQ_LEN=$1 # 256, 512, 1024, 2048
 if [ -z "$SEQ_LEN" ]; then
-    echo "Usage: $0 <seq_len>"
-    exit 1
+    SEQ_LEN=2048
 fi
 TRAIN_ARGS=""
 
+
+# # # #  run_merger "Checkpoint mode" "$SEQ_LEN" "$TRAIN_ARGS" [ "flash" | "torch" ]
 run_merger "base" "$SEQ_LEN" "$TRAIN_ARGS"
 run_merger "pccheck" "$SEQ_LEN" "$TRAIN_ARGS"
 
