@@ -90,6 +90,7 @@ run_merger() {
     MODE="$1"
     SEQ_LEN="$2"
     TRAINING_ARGS="$3"
+    FLASH_ATTN_MODE="$4"
 
     [ -d "$MERGER_DIR/chkpts" ] || mkdir $MERGER_DIR/chkpts
     [ -d "$MERGER_DIR/results" ] || mkdir $MERGER_DIR/results
@@ -114,64 +115,9 @@ run_merger() {
         if [ "$flash_attn" == "True" ]; then
             export USE_FLASH_ATTENTION="1"
             out_file_prefix="$MODE-flash"
-            if [ "$MODE" == "base" ]; then
-                if [ "$SEQ_LEN" == "2048" ]; then
-                    time_out=105
-                elif [ "$SEQ_LEN" == "1024" ]; then
-                    time_out=105
-                elif [ "$SEQ_LEN" == "512" ]; then
-                    time_out=85
-                elif [ "$SEQ_LEN" == "256" ]; then
-                    time_out=60
-                else
-                    echo "Unknown SEQ_LEN: $SEQ_LEN"
-                    exit 1
-                fi
-            elif [ "$MODE" == "pccheck" ]; then
-                if [ "$SEQ_LEN" == "2048" ]; then
-                    time_out=80
-                elif [ "$SEQ_LEN" == "1024" ]; then
-                    time_out=80
-                elif [ "$SEQ_LEN" == "512" ]; then
-                    time_out=60
-                elif [ "$SEQ_LEN" == "256" ]; then
-                    time_out=60
-                else
-                    echo "Unknown SEQ_LEN: $SEQ_LEN"
-                    exit 1
-                fi
-            fi
         else
             export USE_FLASH_ATTENTION="0"
             out_file_prefix="$MODE-torch"
-            
-            if [ "$MODE" == "base" ]; then
-                if [ "$SEQ_LEN" == "2048" ]; then
-                    time_out=90
-                elif [ "$SEQ_LEN" == "1024" ]; then
-                    time_out=90
-                elif [ "$SEQ_LEN" == "512" ]; then
-                    time_out=60
-                elif [ "$SEQ_LEN" == "256" ]; then
-                    time_out=60
-                else
-                    echo "Unknown SEQ_LEN: $SEQ_LEN"
-                    exit 1
-                fi
-            elif [ "$MODE" == "pccheck" ]; then
-                if [ "$SEQ_LEN" == "2048" ]; then
-                    time_out=85
-                elif [ "$SEQ_LEN" == "1024" ]; then
-                    time_out=85
-                elif [ "$SEQ_LEN" == "512" ]; then
-                    time_out=60
-                elif [ "$SEQ_LEN" == "256" ]; then
-                    time_out=60
-                else
-                    echo "Unknown SEQ_LEN: $SEQ_LEN"
-                    exit 1
-                fi
-            fi
         fi
 
         srun_outfile=$(get_srun_outfile "$MERGER_DIR/logs" "$SRUN_OUTFILE_SUFFIX-$out_file_prefix" "$SEQ_LEN-part1")
@@ -187,13 +133,61 @@ run_merger() {
                               --checkpoint-dir $MERGER_DIR/chkpts \
                               --sequence-length $SEQ_LEN \
                               --checkpoint-freq 100"
+        stop_at_step=410
 
         TRAINING_CMD="$TRAINING_BASE_CMD \
                               --loss-file $MERGER_DIR/results/$DTYPE/loss-$out_file_prefix-$SEQ_LEN-part1.csv \
                               $TRAINING_ARGS"
+        # Remove the file if it exists as it interferes with the check for target line
+        echo "" > $srun_outfile
         srun --output $srun_outfile \
              --cpus-per-task $SLURM_CPUS_PER_TASK \
-             bash -c "timeout -s SIGINT $time_out $CMD_PREFIX $TRAINING_CMD; ec=\$?; [ \$ec -eq 0 ] || [ \$ec -eq 124 ]"
+             bash -c "$CMD_PREFIX $TRAINING_CMD" &
+        srun_pid=$!
+
+        srun_step_id=""
+        target_line="INFO - Step: $stop_at_step"
+        stopped_by_script=false
+        while kill -0 $srun_pid 2>/dev/null; do
+            if grep -q "$target_line" "$srun_outfile"; then
+                stopped_by_script=true
+                
+                line=$(sacct -n -j "$SLURM_JOB_ID" \
+                        --format=JobID,JobName,State | grep RUNNING | grep bash || true)
+                srun_step_id=$(awk '{print $1}' <<< "$line")
+
+                [[ -z "$srun_step_id" ]] && {
+                    echo " ! Could not determine step-ID; giving up."
+                    exit 1
+                }
+
+                # -----------------------------------------------------------------------
+                # 2. Repeatedly scancel until the step is gone
+                # -----------------------------------------------------------------------
+                attempt=0
+                while kill -0 "$srun_pid" 2>/dev/null; do
+                    if ! squeue -h -j "$srun_step_id" &>/dev/null; then
+                        break
+                    fi
+
+                    echo " > Attempt $attempt: scancel --signal=SIGKILL  $srun_step_id"
+                    scancel --signal=SIGKILL "$srun_step_id" || true
+                    sleep 2
+                done
+                break
+            fi
+            sleep 2
+        done
+        
+        if $stopped_by_script; then
+            status=0
+        elif [[ ${status:-0} -ne 0 ]]; then
+            echo " > srun failed with exit code ${status}"
+            exit $status
+        else
+            echo " > srun finished sucessfully but $target_line not found."
+            exit $status
+        fi
 
 
         
@@ -208,14 +202,29 @@ run_merger() {
         srun --output $srun_outfile \
              --cpus-per-task $SLURM_CPUS_PER_TASK \
              bash -c "$CMD_PREFIX $TRAINING_CMD"
+
+        echo "--------------- FAv3: $flash_attn   Checkpt: $MODE   Seq Len: $SEQ_LEN   Complete! ----------------"
     }
 
-    bench_flash_attn "True"
-    bench_flash_attn "False"
+    if [ -z "$FLASH_ATTN_MODE" ]; then
+        bench_flash_attn "True"
+        bench_flash_attn "False"
+    elif [ "$FLASH_ATTN_MODE" == "flash" ]; then
+        bench_flash_attn "True"
+    elif [ "$FLASH_ATTN_MODE" == "torch" ]; then
+        bench_flash_attn "False"
+    else
+        echo "Unknown FLASH_ATTN_MODE: $FLASH_ATTN_MODE"
+        exit 1
+    fi
 }
 
 
-SEQ_LEN=256
+SEQ_LEN=$1 # 256, 512, 1024, 2048
+if [ -z "$SEQ_LEN" ]; then
+    echo "Usage: $0 <seq_len>"
+    exit 1
+fi
 TRAIN_ARGS=""
 
 run_merger "base" "$SEQ_LEN" "$TRAIN_ARGS"
