@@ -5,40 +5,43 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # pattern = 
-def plt_loss_curves(seq_len):
-    csv_files = glob.glob(f"bf16/loss-*-{seq_len}-part*.csv")
+def plt_loss_curves(seq_len, plot_extended=False):
+    if plot_extended:
+        fig_width = 20
+        skip_points = 1
+    else:
+        fig_width = 8
+        skip_points = 4
+    
+    csv_files_to_style = {
+        # CSV File Name:                                    ( Color,        lw,     Label)
+        f"bf16/valid-base-torch-{seq_len}-1.csv":           ('orange',      3.00,   "Pure Pytorch w/o Restart"),
+        f"bf16/valid-base-torch-{seq_len}-2.csv":           ('gold',        0.75,   None),
+        f"bf16/valid-base-flash-{seq_len}-1.csv":           ('green',       3.00,   "FAv3 w/o Restart"),
+        f"bf16/valid-base-flash-{seq_len}-2.csv":           ('lime',        0.75,   None),
+        f"bf16/valid-pccheck-flash-{seq_len}-1.csv":        ('purple',      3.00,   "FAv3 + PCcheck w/o Restart"),
+        f"bf16/valid-pccheck-flash-{seq_len}-2.csv":        ('fuchsia',     0.75,   None),
+        f"bf16/valid-pccheck-flash-{seq_len}-part1.csv":    ('deepskyblue', 1.50,   "FAv3 + PCcheck w/ Restart"),
+        f"bf16/valid-pccheck-flash-{seq_len}-part2.csv":    ('deepskyblue', 1.50,   None),
+    }
 
+    csv_files = list(csv_files_to_style.keys())
     # Plot the loss curves
-    plt.figure(figsize=(8, 5))
+    plt.figure(figsize=(fig_width, 5))
     restart_steps = {}
-    for fname in sorted(csv_files):
+    for fname in csv_files:
         df = pd.read_csv(fname)
         if {"step", "loss"} <= set(df.columns):
-            label = os.path.splitext(os.path.basename(fname))[0]
-
-            if "torch" in label:
-                color = 'gold'
-            else:
-                color = 'lime'
+            color, lw, label = csv_files_to_style[fname]
+            dashes = (2, 2) if "part" in fname else (5, 0)
+            linestyle = 'dashed' if "part" in fname else 'solid'
             
-            if "pccheck" in label:
-                lw = 1.5
-                dashes = (5, 5)
-                linestyle = 'dashed'
-                color = 'darkorange' if color == 'gold' else 'darkgreen'
-            else:
-                lw = 1.5
-                dashes = (5, 0)
-                linestyle = 'solid'
-                    
-            
-            if "part1" in label:
-                label = label.replace(f"-{seq_len}-part1", "").replace("loss-", "")
+            if "part1" in fname:
                 restart_steps[label] = df["step"].max()
-            else:
-                label = None
 
-            plt.plot(df["step"][::4], df["loss"][::4], label=label, linestyle=linestyle, dashes=dashes, lw=lw, color=color)
+            plt.plot(df["step"][::skip_points], 
+                     df["loss"][::skip_points], 
+                     label=label, linestyle=linestyle, dashes=dashes, lw=lw, color=color)
 
     # Check if all elements in restart_steps are the same
     if all(x == list(restart_steps.values())[0] for x in restart_steps.values()):
@@ -55,5 +58,4 @@ def plt_loss_curves(seq_len):
     plt.tight_layout()
     plt.savefig(f"loss_curves_{seq_len}.png", dpi=600)
 
-for seq_len in [256, 512, 1024, 2048]:
-    plt_loss_curves(seq_len)
+plt_loss_curves(2048)
