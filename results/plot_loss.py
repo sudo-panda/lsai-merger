@@ -15,8 +15,8 @@ def plt_loss_curves(seq_len, plot_extended=False):
     
     csv_files_to_style = {
         # CSV File Name:                                    ( Color,        lw,     Label)
-        f"bf16/valid-base-torch-{seq_len}-1.csv":           ('orange',      3.00,   "Pure Pytorch w/o Restart"),
-        f"bf16/valid-base-torch-{seq_len}-2.csv":           ('gold',        0.75,   None),
+        # f"bf16/valid-base-torch-{seq_len}-1.csv":           ('orange',      3.00,   "Pure Pytorch w/o Restart"),
+        # f"bf16/valid-base-torch-{seq_len}-2.csv":           ('gold',        0.75,   None),
         f"bf16/valid-base-flash-{seq_len}-1.csv":           ('green',       3.00,   "FAv3 w/o Restart"),
         f"bf16/valid-base-flash-{seq_len}-2.csv":           ('lime',        0.75,   None),
         f"bf16/valid-pccheck-flash-{seq_len}-1.csv":        ('purple',      3.00,   "FAv3 + PCcheck w/o Restart"),
